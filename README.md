@@ -41,7 +41,7 @@ results/        → Graphiques générés
 Les fichiers ne sont pas inclus dans ce repo car trop volumineux.
 
 1. `movies_metadata.csv` → [Kaggle - The Movies Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset)
-2. `Cell_Phones_and_Accessories_5.json` → [Amazon Reviews Dataset](https://nijianmo.github.io/amazon/index.html)
+2. `Cell_Phones_and_Accessories_5.json` → [Dataset](http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Cell_Phones_and_Accessories_5.json.gz)
 3. `movies_preprocessed.csv` et `vocabulary.csv` → générés automatiquement par `main.py`
 4. `word2vec_model.bin` → généré automatiquement par `main.py`
 5. `word2vec_phones.bin` → généré automatiquement par `phones.py`
