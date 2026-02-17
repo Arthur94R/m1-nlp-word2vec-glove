@@ -1,5 +1,3 @@
-#TP1
-
 # Manipulation de données
 import pandas as pd
 import numpy as np
@@ -52,7 +50,7 @@ print("✓ Imports terminés !")
 print("=== CHARGEMENT DES DONNÉES ===\n")
 
 # Chargement du dataset principal
-df = pd.read_csv('data/movies_metadata.csv', low_memory=False)
+df = pd.read_csv('../data/movies_metadata.csv', low_memory=False)
 
 print(f"Shape du dataset : {df.shape}")
 print(f"Nombre de films : {df.shape[0]}")
@@ -312,12 +310,12 @@ print(f"\nExemples de tokens apparaissant 1 seule fois :")
 print(rare_tokens[:30])
 
 # Sauvegarde
-df_clean.to_csv('data/movies_preprocessed.csv', index=False)
-print(f"\n✓ Dataset preprocessed sauvegardé : data/movies_preprocessed.csv")
+df_clean.to_csv('../data/movies_preprocessed.csv', index=False)
+print(f"\n✓ Dataset preprocessed sauvegardé : ../data/movies_preprocessed.csv")
 
 vocab_df = pd.DataFrame(token_counts.most_common(), columns=['token', 'frequency'])
-vocab_df.to_csv('data/vocabulary.csv', index=False)
-print(f"✓ Vocabulaire sauvegardé : data/vocabulary.csv ({len(vocab_df)} tokens)\n")
+vocab_df.to_csv('../data/vocabulary.csv', index=False)
+print(f"✓ Vocabulaire sauvegardé : ../data/vocabulary.csv ({len(vocab_df)} tokens)\n")
 
 # ===========================
 # ÉTAPE 4 : MODÈLE ML CLASSIQUE (SANS TEXTE)
@@ -536,8 +534,8 @@ for word in example_words:
         print(f"\n'{word}' → {vector[:10]}... (100 dimensions)")
 
 # Sauvegarde du modèle
-model_clean.save("data/word2vec_model.bin")
-print("\n✓ Modèle Word2Vec sauvegardé : data/word2vec_model.bin")
+model_clean.save("../data/word2vec_model.bin")
+print("\n✓ Modèle Word2Vec sauvegardé : ../data/word2vec_model.bin")
 
 print("\n=== REMARQUES ===")
 print("""
