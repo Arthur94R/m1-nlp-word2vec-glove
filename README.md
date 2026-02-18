@@ -2,6 +2,8 @@
 
 Projet universitaire — Master 1 IA & Big Data, Université Paris 8
 
+## 🔴 Utilisation de l'IA pour un code commenté et un README.md compréhensible par tous.
+
 ## 📋 Description
 
 Analyse de textes à l'aide de techniques NLP sur deux datasets distincts :
