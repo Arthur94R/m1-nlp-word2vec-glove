@@ -1,80 +1,121 @@
-# 🎬📱 NLP — Analyse de films et reviews Amazon
+Projet GitHub : https://github.com/Arthur94R/m1-nlp-word2vec
+
+# 🎬📱 TP1 — Embeddings Word2Vec
 
 Projet universitaire — Master 1 IA & Big Data, Université Paris 8
 
-## 🔴 Utilisation de l'IA pour un code commenté et un README.md compréhensible par tous.
-
 ## 📋 Description
 
-Analyse de textes à l'aide de techniques NLP sur deux datasets distincts :
-preprocessing de texte, création de vocabulaire et embeddings **Word2Vec**
-pour améliorer la prédiction de variables cibles.
+Création et analyse d'embeddings Word2Vec sur deux datasets textuels :
+- **Dataset 1** : 45 466 descriptions de films
+- **Dataset 2** : 194 439 reviews Amazon d'accessoires téléphoniques
 
-- **Dataset 1** : 45 000 descriptions de films → prédiction de la note moyenne
-- **Dataset 2** : 194 000 reviews Amazon d'accessoires téléphoniques → prédiction de la note (1 à 5)
+L'objectif est de comprendre comment Word2Vec capture le sens sémantique des mots en transformant du texte en vecteurs numériques.
 
-## 🔍 Résultats clés
+## 🎯 Objectif
 
-- Preprocessing complet : tokenisation, suppression des stop words, filtrage
-- Vocabulaire analysé avec distribution des fréquences de tokens
-- Comparaison modèle baseline (features numériques) vs modèle enrichi (embeddings)
-- Les embeddings Word2Vec améliorent la capacité prédictive du modèle
+Démontrer que Word2Vec crée des représentations vectorielles qui capturent :
+- La **similarité sémantique** (mots similaires → vecteurs proches)
+- Les **relations complexes** (analogies comme king - man + woman ≈ queen)
+- Le **contexte d'utilisation** des mots
+
+## 🔍 Étapes du TP
+
+1. **Chargement et analyse** des datasets
+2. **Preprocessing** : lowercase, tokenisation, suppression stop words
+3. **Réduction du vocabulaire** : min_count=5 pour garder les mots fréquents
+4. **Entraînement Word2Vec** : Skip-gram, 100 dimensions
+5. **Analyse des embeddings** :
+   - Mots similaires
+   - Relations vectorielles
+   - Visualisation des vecteurs
 
 ## 🛠️ Stack technique
 
-- **Python** — Pipeline NLP complet
-- **Gensim** — Entraînement des embeddings Word2Vec
+- **Python 3.13** — Langage principal
+- **Gensim** — Entraînement Word2Vec
 - **NLTK** — Tokenisation et stop words
-- **Scikit-learn** — Modèles de prédiction
 - **Pandas / NumPy** — Traitement des données
-- **Matplotlib** — Visualisations
 
 ## 📁 Structure
 ```
-data/           → Datasets (à télécharger, voir ci-dessous)
+data/              → Datasets (à télécharger)
 src/
-├── main.py     → Pipeline NLP — dataset films
-└── phones.py   → Pipeline NLP — dataset reviews téléphones
-results/        → Graphiques générés
+├── main.py        → Pipeline Word2Vec — films
+└── phones.py      → Pipeline Word2Vec — reviews téléphones
+results/           → Modèles sauvegardés
 ```
 
 ## 📥 Récupérer les données
 
-Les fichiers ne sont pas inclus dans ce repo car trop volumineux.
+**Datasets à télécharger :**
 
-1. `movies_metadata.csv` → [Kaggle - The Movies Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset)
-2. `Cell_Phones_and_Accessories_5.json` → [Dataset](http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Cell_Phones_and_Accessories_5.json.gz)
-3. `movies_preprocessed.csv` et `vocabulary.csv` → générés automatiquement par `main.py`
-4. `word2vec_model.bin` → généré automatiquement par `main.py`
-5. `word2vec_phones.bin` → généré automatiquement par `phones.py`
+1. **movies_metadata.csv** → [Kaggle - The Movies Dataset](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset)
+2. **Cell_Phones_and_Accessories_5.json** → [Amazon Reviews](https://nijianmo.github.io/amazon/index.html)
 
-Place les fichiers téléchargés dans le dossier `data/`.
+Placer les fichiers dans le dossier `data/`.
 
-## 🚀 Lancer le projet
+**Fichiers générés automatiquement :**
+- `word2vec_films.bin` — Modèle Word2Vec entraîné sur les films
+- `word2vec_phones.bin` — Modèle Word2Vec entraîné sur les reviews
+
+## 🚀 Installation et lancement
+
+### Installation
 ```bash
 # Installer les dépendances
-pip install pandas numpy matplotlib scikit-learn gensim nltk
+pip install pandas numpy gensim nltk
 
 # Télécharger les ressources NLTK
 python -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
+```
 
-# Lancer le pipeline films
+### Lancement
+```bash
+# Pipeline films
 python src/main.py
 
-# Lancer le pipeline reviews téléphones
+# Pipeline reviews téléphones
 python src/phones.py
 ```
 
-## 📊 Visualisations générées
+## 📊 Résultats attendus
 
-### Dataset films (`main.py`)
-- `distributions_variables_cibles.png` — Distribution des variables cibles
-- `distribution_tokens.png` — Distribution des tokens par description
-- `distribution_frequences.png` — Fréquence des tokens
-- `top_tokens.png` — Top tokens les plus fréquents
-- `feature_importance_baseline.png` — Importance des features (baseline)
-- `predictions_baseline.png` — Prédictions vs valeurs réelles
-- `comparison_baseline_embeddings.png` — Comparaison baseline vs Word2Vec
+### Mots similaires (dataset films)
+```
+'love' est proche de :
+  affection    : 0.741
+  romance      : 0.735
+  madly        : 0.730
 
-### Dataset reviews téléphones (`phones.py`)
-- `overall_distribution.png` — Distribution des notes (1 à 5)
+'action' est proche de :
+  installment  : 0.808
+  paced        : 0.786
+  thriller     : 0.774
+```
+
+### Relations vectorielles
+```
+king - man + woman ≈ princess, ruler, empress
+```
+
+### Vecteurs
+Chaque mot = vecteur de 100 dimensions
+```
+'love' → [0.084, 0.115, -0.090, -0.551, ...]
+'hero' → [0.462, -0.068, 0.424, -0.315, ...]
+```
+
+## 📝 Livrables
+
+- ✅ Code source (`main.py`, `phones.py`)
+- ✅ Modèles Word2Vec entraînés
+- ✅ Rapport PDF d'analyse
+- ✅ README
+
+## 🎓 Concepts clés
+
+- **Word2Vec** : Algorithme de représentation textuelle (pas un modèle de prédiction)
+- **Skip-gram** : Méthode qui prédit le contexte à partir d'un mot
+- **Embeddings** : Représentations vectorielles denses des mots
+- **Similarité cosinus** : Mesure de proximité entre vecteurs
